@@ -309,14 +309,8 @@ def extract_waveform_features(waveform, feature_type="all", metadata=None):
             )
         )  # Incidence
 
-    # TIER C: Corner-frequency anisotropy (source physics metric)
+    # TIER C: Source physics parameters
     if feature_type in ["all", "physics"]:
-        fc_Z = features.get("Z_corner_freq", np.nan)
-        fc_N = features.get("N_corner_freq", np.nan)
-        fc_E = features.get("E_corner_freq", np.nan)
-        fc_Hgeom = np.sqrt(fc_N * fc_E)  # geometric mean horizontal
-        features["fc_anisotropy"] = fc_Z - fc_Hgeom  # Hz
-
         # Add average calibrated parameters across components
         # For stress drop, use geometric mean (log-normal distribution)
         stress_drops = [
